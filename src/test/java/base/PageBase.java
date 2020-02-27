@@ -25,8 +25,10 @@ public class PageBase {
     public static int WAIT_TIME =15;
 
     @Before
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
         browser = System.getProperty("browser");
+        if (browser == null)
+          throw new Exception("undefined browser name, please set a -Dbrowser parameter" );
         switch (browser) {
             case "Chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
