@@ -7,7 +7,7 @@ import pages.HomePage;
 public class CoreTest extends PageBase {
 
     @Test
-    public void test() throws InterruptedException {
+    public void test() throws Exception {
         HomePage homePage = new HomePage(driver);
         homePage.assertHomeIsLoaded()
                 .moveTomMAccount()

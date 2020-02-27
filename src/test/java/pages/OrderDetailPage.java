@@ -2,6 +2,7 @@ package pages;
 
 import base.PageBase;
 import base.TestBase;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class OrderDetailPage extends TestBase {
     RemoteWebDriver driver;
@@ -80,9 +82,15 @@ public class OrderDetailPage extends TestBase {
         return this;
     }
 
-    public OrderDetailPage assertItemsCancelMessage(){
+    public OrderDetailPage assertItemsCancelMessage() throws Exception {
         System.out.println("assert cancel item message");
-        Assert.assertTrue(alertText.getText().contains("iptal edildi"));
+        String text = new String();
+        try{
+            text =alertText.getText();
+        }catch (NoSuchElementException e){
+            throw new Exception("this item can't canceld"+ " "+e.getMessage());
+        }
+        Assert.assertTrue(text.contains("iptal edildi"));
         return this;
     }
 
