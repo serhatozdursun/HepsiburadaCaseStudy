@@ -47,7 +47,7 @@ public class HomePage extends TestBase {
         return this;
     }
 
-    public HomePage moveTomMAccount() {
+    public HomePage moveTomMAccount() throws InterruptedException {
         System.out.println("move to myAccount menue");
         moveElement(driver, myAccount);
         return this;
@@ -61,12 +61,12 @@ public class HomePage extends TestBase {
 
     public HomePage assertIsLoggedIn() {
         System.out.println("confirming user was logged in");
-        String username = userName.getText();
+        waitForDOMLoad(driver);
         Assert.assertEquals(USER_NAME.getLoginInfo(), userName.getText());
         return this;
     }
 
-    public HomePage moveToKitapMuzikFilmHobi() {
+    public HomePage moveToKitapMuzikFilmHobi() throws InterruptedException {
         System.out.println("move to kitapMuzikFilmHobi");
         moveElement(driver, kitapMuzikFilmHobi);
         return this;

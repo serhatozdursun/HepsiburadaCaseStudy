@@ -63,10 +63,9 @@ public class OrderDetailPage extends TestBase {
         for (int i = 0; i < items.size(); i++) {
             if (!isChecked(driver, ".hb-form-checkbox__input", i)) {
                 WebElement checkBox = items.get(i).findElement(By.cssSelector(".hb-form-checkbox__input"));
-                moveElement(driver, checkBox);
+                scrollToElement(driver, checkBox);
                 clickElementWithJS(driver, checkBox);
             }
-
             for (int j = 0; j < 5; i++) {
                 Thread.sleep(10);
                 if (isElementPresent(driver, By.cssSelector(".selectbox-placeholder"), OrderDetailPage.class)) {
@@ -76,9 +75,8 @@ public class OrderDetailPage extends TestBase {
 
             clickElementWithJS(driver, cancelReasonSelectBox.get(i));
             clickElementWithJS(driver, reasonOpitions.get(2));
-
         }
-        cancelSelectedItems.click();
+        clickElementWithJS(driver,cancelSelectedItems);
         return this;
     }
 

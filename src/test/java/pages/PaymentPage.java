@@ -3,7 +3,6 @@ package pages;
 import base.PageBase;
 import base.TestBase;
 import org.junit.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import java.util.List;
 import java.util.Random;
-import java.util.TreeMap;
 
 public class PaymentPage extends TestBase {
     RemoteWebDriver driver;
@@ -62,20 +60,19 @@ public class PaymentPage extends TestBase {
     public PaymentPage clickRandomBank(){
         System.out.println("click random bank");
         Random random = new Random();
-        selectBankSelect.get(random.nextInt(selectBankSelect.size()-1)).click();
+        clickElementWithJS(driver,selectBankSelect.get(random.nextInt(selectBankSelect.size()-1)));
         return this;
     }
 
     public PaymentPage chooseMoneyTransferOpiton(){
-        if(isElementPresent(driver, By.cssSelector("[data-bind*='setInstantEft']"),PaymentPage.class)){
-            ibanEft.click();
-        }
+        if (isElementPresent(driver, By.cssSelector("[data-bind*='setInstantEft']"), PaymentPage.class))
+            clickElementWithJS(driver, ibanEft);
         return this;
     }
 
     public PaymentPage clickContiuonProceedContainer(){
         System.out.println("click continue");
-        continueBtonOnProceedContainer.click();
+        clickElementWithJS(driver,continueBtonOnProceedContainer);
         return this;
     }
 

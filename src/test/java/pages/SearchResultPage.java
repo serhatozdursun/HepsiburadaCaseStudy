@@ -41,7 +41,7 @@ public class SearchResultPage extends TestBase {
         return this;
     }
 
-    public SearchResultPage clickRandomProductOnProductList() {
+    public SearchResultPage clickRandomProductOnProductList() throws InterruptedException {
         System.out.println("click random product on product list");
         Random random = new Random();
 
@@ -66,7 +66,7 @@ public class SearchResultPage extends TestBase {
         return this;
     }
 
-    public ShoppingCartPage clickShoppingCart() {
+    public ShoppingCartPage clickShoppingCart() throws InterruptedException {
         System.out.println("click shopping cart");
         moveElement(driver, shoppingCart);
         shoppingCart.click();
