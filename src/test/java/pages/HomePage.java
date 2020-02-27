@@ -37,8 +37,8 @@ public class HomePage extends TestBase {
     @FindBy(id = "kitap-muzik-film-hobi")
     private WebElement kitapMuzikFilmHobi;
 
-    @FindBy(css = "[href*='kitaplar']")
-    private List<WebElement> books;
+    @FindBy(css = "[data-categoryid='2147483645']")
+    private WebElement books;
 
     public HomePage assertHomeIsLoaded() {
         System.out.println("confirming the page is loading");
@@ -72,10 +72,9 @@ public class HomePage extends TestBase {
         return this;
     }
 
-    public SearchResultPage clickRandomBooksSubMenu(){
+    public SearchResultPage clickRandomBooksSubMenu() throws InterruptedException {
         System.out.println("click books submenue");
-        Random random = new Random();
-        books.get(random.nextInt(books.size()-1)).click();
+        books.click();
         return new SearchResultPage(driver);
     }
 }
