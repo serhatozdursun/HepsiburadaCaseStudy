@@ -11,6 +11,11 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
+import static base.PageBase.IMPLICITYLY_WAIT;
+import static base.PageBase.WAIT_TIME;
+
 public class TestBase {
 
     public void moveElement(RemoteWebDriver driver, WebElement webElement) throws InterruptedException {
@@ -24,7 +29,7 @@ public class TestBase {
             try {
                 actions.moveByOffset(x, y).build().perform();
             } catch (MoveTargetOutOfBoundsException e) {
-                scrollToElement(driver,webElement);
+                scrollToElement(driver, webElement);
                 actions.moveToElement(webElement).build().perform();
             }
 
@@ -33,9 +38,7 @@ public class TestBase {
     }
 
     public void scrollToElement(RemoteWebDriver driver, WebElement webElement) {
-        int x = webElement.getLocation().x;
-        int y = webElement.getLocation().y;
-        javascriptExecutor(driver).executeScript("window.scrollTo(" + x + "," + y + ");");
+        javascriptExecutor(driver).executeScript("window.scrollTo(" + webElement.getLocation().x + "," + webElement.getLocation().y + ");");
     }
 
     public WebDriverWait wait(RemoteWebDriver driver) {
@@ -46,13 +49,20 @@ public class TestBase {
         wait(driver).until(ExpectedConditions.invisibilityOfAllElements(webElement));
     }
 
+    public void waitForElementToBeClickable(RemoteWebDriver driver, WebElement webElement) {
+        wait(driver).until(ExpectedConditions.elementToBeClickable(webElement));
+    }
+
     public boolean isElementPresent(RemoteWebDriver driver, By by, Class page) {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 1), page);
+        driver.manage().timeouts().implicitlyWait(100, TimeUnit.MICROSECONDS);
         if (driver.findElements(by).size() > 0) {
-            PageFactory.initElements(new AjaxElementLocatorFactory(driver, PageBase.WAIT_TIME), page);
+            PageFactory.initElements(new AjaxElementLocatorFactory(driver, WAIT_TIME), page);
+            driver.manage().timeouts().implicitlyWait(IMPLICITYLY_WAIT, TimeUnit.MICROSECONDS);
             return true;
         } else {
-            PageFactory.initElements(new AjaxElementLocatorFactory(driver, PageBase.WAIT_TIME), page);
+            PageFactory.initElements(new AjaxElementLocatorFactory(driver, WAIT_TIME), page);
+            driver.manage().timeouts().implicitlyWait(IMPLICITYLY_WAIT, TimeUnit.MICROSECONDS);
             return false;
         }
     }

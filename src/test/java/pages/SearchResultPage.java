@@ -23,7 +23,7 @@ public class SearchResultPage extends TestBase {
 
     public static String PRODUCT_NAME;
 
-    @FindBy(css = ".sibling")
+    @FindBy(css = ".sibling span")
     private WebElement sibling;
 
     @FindBy(css = ".search-item .product")
@@ -38,6 +38,12 @@ public class SearchResultPage extends TestBase {
     public SearchResultPage assertBookAndMagazineCategoryIsLoad() {
         System.out.println("confirming the BookAndMagazine page is loading");
         Assert.assertTrue(sibling.getText().contains("Kitap"));
+        return this;
+    }
+
+    public SearchResultPage assertComputerCategoryIsLoad() {
+        System.out.println("confirming the BookAndMagazine page is loading");
+        Assert.assertTrue(sibling.getText().contains("Bilgisayarlar"));
         return this;
     }
 

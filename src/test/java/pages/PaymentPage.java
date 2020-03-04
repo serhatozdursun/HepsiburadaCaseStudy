@@ -49,11 +49,9 @@ public class PaymentPage extends TestBase {
 
     public PaymentPage clickMoneyTransfer() throws InterruptedException {
         System.out.println("click money transfer");
+        waitForElementToBeClickable(driver,clickMonyTransfer);
+        Thread.sleep(200);
         clickMonyTransfer.click();
-        if (!isElementPresent(driver,By.cssSelector(".input-select"),PaymentPage.class)){
-            Thread.sleep(100);
-            clickMonyTransfer.click();
-        }
         return this;
     }
 
@@ -78,7 +76,8 @@ public class PaymentPage extends TestBase {
 
     public OrderSummaryPage clickContiuonFancyBox(){
         System.out.println("click continue");
-        continueButtonOnFancyBox.click();
+        waitForElementToBeClickable(driver,continueButtonOnFancyBox);
+        clickElementWithJS(driver,continueButtonOnFancyBox);
         return new OrderSummaryPage(driver);
     }
 

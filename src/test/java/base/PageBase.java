@@ -6,6 +6,7 @@ import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,6 +24,8 @@ public class PageBase {
     public RemoteWebDriver driver;
     public static String browser;
     public static int WAIT_TIME =15;
+    public static int IMPLICITYLY_WAIT =5;
+    private static int PAGE_LOAD_TIMEOUT=30;
 
     @Before
     public void initialize() throws Exception {
@@ -52,8 +55,8 @@ public class PageBase {
                 break;
         }
         Configuration configuration = new Configuration();
-        driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(IMPLICITYLY_WAIT, TimeUnit.SECONDS);
         driver.get(configuration.getBaseUrl());
 
     }

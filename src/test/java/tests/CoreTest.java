@@ -10,7 +10,7 @@ public class CoreTest extends PageBase {
     public void addToShoppingCardAndCancelOrderTest() throws Exception {
         HomePage homePage = new HomePage(driver);
         homePage.assertHomeIsLoaded()
-                .moveTomMAccount()
+                .moveToMyAccount()
                 .clickLogin()
                 .assertLoginPageIsLoaded()
                 .typeEmail()
@@ -45,4 +45,5 @@ public class CoreTest extends PageBase {
                 .assertItemsCancelMessage()
                 .closemodel();
     }
+
 }
