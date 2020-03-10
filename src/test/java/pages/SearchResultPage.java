@@ -15,7 +15,6 @@ import java.util.Random;
 
 public class SearchResultPage extends TestBase {
     RemoteWebDriver driver;
-
     public SearchResultPage(RemoteWebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, PageBase.WAIT_TIME), this);
@@ -55,8 +54,12 @@ public class SearchResultPage extends TestBase {
         moveElement(driver, selectedProduct);
 
         selectedProduct.findElement(By.cssSelector(".add-to-basket")).click();
-        PRODUCT_NAME = selectedProduct.findElement(By.cssSelector(".product-title")).getText();
+        setSelectedProductName(selectedProduct);
         return this;
+    }
+
+    private void setSelectedProductName(WebElement selectedProduct) {
+        PRODUCT_NAME = selectedProduct.findElement(By.cssSelector(".product-title")).getText();
     }
 
     public SearchResultPage checkNotificationIsDisplayed() {
@@ -68,7 +71,7 @@ public class SearchResultPage extends TestBase {
     public SearchResultPage checkAddToBasketSuccessNotificationMessage() {
         System.out.println("check notification message");
         Assert.assertEquals("success message is wrong", "Ürün başarılı bir şekilde sepete eklenmiştir.", notification.getText());
-        waitForInvisibilityOfAllElements(driver,notification);
+        waitForInvisibilityOfAllElements(driver, notification);
         return this;
     }
 
@@ -77,5 +80,12 @@ public class SearchResultPage extends TestBase {
         moveElement(driver, shoppingCart);
         shoppingCart.click();
         return new ShoppingCartPage(driver);
+    }
+
+    public ProductDetailPage clickProduct(int productIndex) {
+        WebElement selectedProduct = productList.get(productIndex).findElement(By.cssSelector("a"));
+        setSelectedProductName(selectedProduct);
+        productList.get(productIndex).click();
+        return new ProductDetailPage(driver);
     }
 }

@@ -1,6 +1,7 @@
 package pages;
 
 import base.PageBase;
+
 import base.TestBase;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -8,9 +9,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-
-import java.util.List;
-import java.util.Random;
 
 import static enums.LoginInfo.USER_NAME;
 
@@ -43,10 +41,10 @@ public class HomePage extends TestBase {
     @FindBy(id = "elektronik")
     private WebElement electronicMenu;
 
-    @FindBy(css = "[data-title='Dizüstü Bilgisayar']")
+    @FindBy(css = "[data-categoryid='2147483646']")
     private WebElement laptopOption;
 
-    @FindBy(css = "[data-title='Bilgisayar/Tablet']")
+    @FindBy(css = "[data-categoryid='98']")
     private WebElement computerTabletItem;
 
     public HomePage assertHomeIsLoaded() {
@@ -101,7 +99,8 @@ public class HomePage extends TestBase {
 
     public SearchResultPage clickComputerTabletItem() throws InterruptedException {
         System.out.println("click computer tablet item");
-        moveElement(driver,laptopOption);
+        waitForElementToBeClickable(driver,computerTabletItem);
+        clickElementWithJS(driver,computerTabletItem);
         return new SearchResultPage(driver);
     }
 }

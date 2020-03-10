@@ -1,9 +1,10 @@
 package enums;
 
 public enum LoginInfo {
-    EMAIL("pinawab113@edusamail.net"),
+    MEMBER_EMAIL("pinawab113@edusamail.net"),
     PASSWORD("hEpSiBuAda57?"),
-    USER_NAME("Serhat Özdursun");
+    USER_NAME("Serhat Özdursun"),
+    EMAIL("q1w2we34e@hepsi.com");
 
     private String loginInfoValue;
 

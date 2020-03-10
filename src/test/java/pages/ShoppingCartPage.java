@@ -19,6 +19,9 @@ public class ShoppingCartPage {
     @FindBy(css = ".btn-primary")
     private WebElement btnPrimary;
 
+    @FindBy(css = ".product-name")
+    private WebElement productName;
+
     public ShoppingCartPage assertShoppingCartPageIsLoaded(){
         System.out.println("assert shopping cart page is loaded");
         Assert.assertTrue("btnPrimary wasn't displayed",btnPrimary.isDisplayed());
@@ -31,5 +34,17 @@ public class ShoppingCartPage {
         System.out.println("click BtnPrimary");
         btnPrimary.click();
         return new ShippingPage(driver);
+    }
+
+    public LoginPage clickBtnPrimaryWithoutSignIn(){
+        System.out.println("click BtnPrimary");
+        btnPrimary.click();
+        return new LoginPage(driver);
+    }
+
+    public ShoppingCartPage checkProduct(){
+        System.out.println("check product");
+        Assert.assertEquals(SearchResultPage.PRODUCT_NAME,productName.getText());
+        return this;
     }
 }

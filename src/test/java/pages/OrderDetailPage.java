@@ -2,7 +2,6 @@ package pages;
 
 import base.PageBase;
 import base.TestBase;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static base.PageBase.IMPLICITYLY_WAIT;
@@ -103,5 +104,15 @@ public class TestBase {
                 e1.printStackTrace();
             }
         }
+    }
+
+    public String createTestName() {
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        String fullname = "";
+        for (int i = 0; i <= 10; i++) {
+            Random random = new Random();
+            fullname = fullname + alphabet[random.nextInt(alphabet.length - 1)];
+        }
+        return "Test " + fullname;
     }
 }

@@ -42,7 +42,6 @@ public class PaymentPage extends TestBase {
     public PaymentPage assertPaymentPageIsLoad() {
         System.out.println("assert payment page is load");
         Assert.assertTrue("payment type list wasn't displayed", paymentTypeList.isDisplayed());
-
         Assert.assertEquals("https://www.hepsiburada.com/ayagina-gelsin/odeme", driver.getCurrentUrl());
         return this;
     }

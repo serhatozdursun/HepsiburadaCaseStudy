@@ -8,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import static pages.ProductDetailPage.PRODUCT_PRICE;
+import static pages.SearchResultPage.PRODUCT_NAME;
+
 public class OrderSummaryPage {
     RemoteWebDriver driver;
 
@@ -22,6 +25,13 @@ public class OrderSummaryPage {
     @FindBy(css = "#frm-save-order .btn-primary")
     private WebElement confrimbtn;
 
+    @FindBy(css = ".price")
+    private WebElement orderProductPrice;
+
+    @FindBy(css = ".col-product-name")
+    private WebElement productName;
+
+
     public OrderSummaryPage assertOrderSummaryPageIsLoad() {
         System.out.println("assert order summary pageIsLoad");
         Assert.assertEquals("Sipariş Özeti", title.getText());
@@ -29,7 +39,17 @@ public class OrderSummaryPage {
         return this;
     }
 
-    public OrderComplatedPage clickConfirmOrder(){
+    public OrderSummaryPage assertProductInfo() {
+        float orderSummaryPrice = Float.parseFloat(orderProductPrice.getText().replace(" TL", "")
+                .replace(".", "")
+                .replace(",", "."));
+        Assert.assertTrue(PRODUCT_PRICE == orderSummaryPrice);
+        String orderSummaryProductName = productName.getText();
+        Assert.assertEquals(PRODUCT_NAME, orderSummaryProductName);
+        return this;
+    }
+
+    public OrderComplatedPage clickConfirmOrder() {
         System.out.println("click confirm order");
         confrimbtn.click();
         return new OrderComplatedPage(driver);
